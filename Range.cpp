@@ -19,10 +19,10 @@ void checkContinuityInInputData(std::vector<int>  sortedInputData, int currentIn
    {
 	   if(isCurrentValueContinuous(sortedInputData[index], sortedInputData[index + 1]))
 	   {
-		   ContinuousRangrInfo.startIndexContinuousRange ++;
-		   ContinuousRangrInfo.endIndexContinuousRange = startIndex;
-		   ContinuousRangrInfo.numberOfReadingsContinuousRange = sortedInputData[index + 1];
-	   }
+		   ContinuousRangrInfo.numberOfReadingsContinuousRange ++;
+		   ContinuousRangrInfo.startIndexContinuousRange = startIndex;
+		   ContinuousRangrInfo.endIndexContinuousRange = sortedInputData[index + 1];
+     }
 	   else
 	   {
 		   break;
