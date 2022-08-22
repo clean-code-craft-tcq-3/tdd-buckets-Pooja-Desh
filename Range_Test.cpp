@@ -15,7 +15,7 @@ TEST_CASE("Calculate continuous range")
   REQUIRE(ContinuousRangeInfoList[0].startIndexContinuousRange == 1);
   REQUIRE(ContinuousRangeInfoList[0].endIndexContinuousRange == 2);
 
-  ::std::vector<int> InputData1 {3, 3, 5, 4, 10, 11, 12};
+  std::vector<int> InputData1 {3, 3, 5, 4, 10, 11, 12};
   std::vector<ContinuousRangeInfo> ContinuousRangeInfoList1;
   ContinuousRangeInfoList1 = CalculateContinuosRange(InputData1);
   REQUIRE(ContinuousRangeInfoList1.size() == 2);
