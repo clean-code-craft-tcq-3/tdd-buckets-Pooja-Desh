@@ -5,21 +5,19 @@
 
 TEST_CASE("Calculate continuous range")
 {
-  /*
   std::vector<int> InputData {1, 2, 4};
   std::vector<ContinuousRangeInfo> ContinuousRangeInfoList;
   ContinuousRangeInfoList = CalculateContinuosRange(InputData);
-  REQUIRE(ContinuousRangeInfoList.size() == 1);
-  REQUIRE(ContinuousRangeInfoList.size() == true);
+  assert(1 == ContinuousRangeInfoList.size());
+  assert(true ==ContinuousRangeInfoList.size());
   REQUIRE(ContinuousRangeInfoList[0].numberOfReadingsContinuousRange == 2);
   REQUIRE(ContinuousRangeInfoList[0].startIndexContinuousRange == 1);
   REQUIRE(ContinuousRangeInfoList[0].endIndexContinuousRange == 2);
-	*/
 
   std::vector<int> InputData1 {3, 3, 5, 4, 10, 11, 12};
   std::vector<ContinuousRangeInfo> ContinuousRangeInfoList1;
   ContinuousRangeInfoList1 = CalculateContinuosRange(InputData1);
-  REQUIRE(ContinuousRangeInfoList1.size() == 2);
+  assert(2 == ContinuousRangeInfoList1.size());
   REQUIRE(ContinuousRangeInfoList1[0].numberOfReadingsContinuousRange == 4);
   REQUIRE(ContinuousRangeInfoList1[0].startIndexContinuousRange == 3);
   REQUIRE(ContinuousRangeInfoList1[0].endIndexContinuousRange == 5);
@@ -33,7 +31,7 @@ TEST_CASE("Test CalculateContinuosRange No Continuous reading")
   std::vector<int> InputData2 {1, 3, 5};
   std::vector<ContinuousRangeInfo> ContinuousRangeInfoList2;
   ContinuousRangeInfoList2 = CalculateContinuosRange(InputData2);
-  REQUIRE(0 == ContinuousRangeInfoList2.size());
+  assert(0 == ContinuousRangeInfoList2.size());
 }
 
 
