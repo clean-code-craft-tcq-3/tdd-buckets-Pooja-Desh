@@ -1,7 +1,6 @@
 #include "Range.hpp"
 #include <algorithm>
 #include <iostream>
-using namespace std;
 
 bool isCurrentValueContinuous(int valueOfCurrentIndex, int ValueOfNextIndex)
 {
