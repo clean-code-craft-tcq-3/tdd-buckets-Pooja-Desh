@@ -1,6 +1,7 @@
 #define CATCH_CONFIG_MAIN  // This tells Catch to provide a main() - only do this in one cpp file
 #include "test/catch.hpp"
 #include "Range.hpp"
+#include "Analog2Digital.hpp"
 
 
 TEST_CASE("Calculate continuous range")
@@ -74,4 +75,31 @@ TEST_CASE("Test isCurrentValueContinuous Negative")
 	int currentIndexValue = 5;
 	int nextIndexValue = 7;
 	REQUIRE((isCurrentValueContinuous(currentIndexValue, nextIndexValue)) == false);
+}
+
+//Test AToD cpnverter implementation
+
+TEST_CASE("Test ConvertFromAnalogToDigital Positive") 
+{
+   std::vector<int> valueInAnalog {4094, 4000};
+   std::vector<int> valueInDigital = ConvertFromAnalogToDigital(valueInAnalog);
+   assert(false == valueInDigital.empty());
+   REQUIRE(valueInDigital[0] == 10);
+   REQUIRE(valueInDigital[1] == 10);
+}
+
+TEST_CASE("Test ConvertFromAnalogToDigital Negative") 
+{
+   std::vector<int> valueInAnalog {0, 4095};
+   std::vector<int> valueInDigital = ConvertFromAnalogToDigital(valueInAnalog);
+   assert(true == valueInDigital.empty());
+}
+
+TEST_CASE("Test getValueInDigital")
+{
+	int valueInAnalog = 4094;
+	REQUIRE((getValueInDigital(valueInAnalog)) == 10);
+	
+	valueInAnalog = 1146;
+	REQUIRE((getValueInDigital(valueInAnalog)) == 3);
 }
