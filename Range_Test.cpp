@@ -32,7 +32,7 @@ TEST_CASE("Test CalculateContinuosRange No Continuous reading")
   std::vector<int> InputData2 {1, 3, 5};
   std::vector<ContinuousRangeInfo> ContinuousRangeInfoList2;
   ContinuousRangeInfoList2 = CalculateContinuosRange(InputData2);
-  assert(0 == ContinuousRangeInfoList2.size());
+  REQUIRE(0 == ContinuousRangeInfoList2.size());
 }
 
 
