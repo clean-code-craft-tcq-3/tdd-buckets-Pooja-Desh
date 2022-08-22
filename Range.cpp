@@ -1,27 +1,27 @@
-#include "Range.h"
-#include <algorithm> 
+#include "Range.hpp"
+#include <algorithm>
 #include <iostream>
 
-bool isValueContinuous(int currentIndexValue, int followingIndexValue)
+bool isCurrentValueContinuous(int valueOfCurrentIndex, int ValueOfNextIndex)
 {
-   if(((followingIndexValue - currentIndexValue) == 1) || ((followingIndexValue - currentIndexValue) == 0))//Continuous element or same element
+  if(((ValueOfNextIndex - valueOfCurrentIndex) == 1) || ((ValueOfNextIndex - valueOfCurrentIndex) == 0))//Continuous element or same element
    {
 	   return true;
    }
    return false;
 }
 
-void checkForContinuityInPeriodicCurrent(std::vector<int> sortedPeriodicCurrents, int CurrentIndexInPeriodicCurrentVector, ContinuityInfo& continuityInfo)
+void checkContinuityInInputData(std::vector<int>  sortedInputData, int currentIndexInputData, ContinuousRangeInfo& ContinuousRangrInfo)
 {
-	int startIndex = sortedPeriodicCurrents[CurrentIndexInPeriodicCurrentVector];
-   for(int index = CurrentIndexInPeriodicCurrentVector; index < (sortedPeriodicCurrents.size() - 1); index++)
+  int startIndex = sortedInputData[currentIndexInputData];
+   for(int index = currentIndexInputData; index < (sortedInputData.size() - 1); index++)
    {
-	   if(isValueContinuous(sortedPeriodicCurrents[index], sortedPeriodicCurrents[index + 1]))
+	   if(isCurrentValueContinuous(sortedInputData[index], sortedInputData[index + 1]))
 	   {
-		   continuityInfo.m_totalReadingContinuousRange ++;
-		   continuityInfo.m_startIndexValueOfContinuousRange = startIndex;
-		   continuityInfo.m_endIndexValueOfContinuousRange = sortedPeriodicCurrents[index + 1];
-	   }
+		   ContinuousRangrInfo.numberOfReadingsContinuousRange++;
+		   ContinuousRangrInfo.startIndexContinuousRange = startIndex;
+		   ContinuousRangrInfo.endIndexContinuousRange = sortedInputData[index + 1];
+     }
 	   else
 	   {
 		   break;
@@ -29,21 +29,21 @@ void checkForContinuityInPeriodicCurrent(std::vector<int> sortedPeriodicCurrents
    }
 }
 
-std::vector<ContinuityInfo> CalculateRangeAndReadings(std::vector<int> periodicCurrentVector)
+std::vector<ContinuousRangeInfo> CalculateContinuosRange(std::vector<int> inputData)
 {
-    int CurrentIndexInPeriodicCurrentVector = 0;
-	std::vector<ContinuityInfo> continuityInfoList;
-	std::sort(periodicCurrentVector.begin(), periodicCurrentVector.end());
-    while(true == (CurrentIndexInPeriodicCurrentVector < periodicCurrentVector.size()))
-	{
-	   ContinuityInfo continuityInfo;
-           checkForContinuityInPeriodicCurrent(periodicCurrentVector, CurrentIndexInPeriodicCurrentVector, continuityInfo);
-	   if(continuityInfo.m_totalReadingContinuousRange > 1)
-	   {
-		  continuityInfoList.push_back(continuityInfo);
-	      CurrentIndexInPeriodicCurrentVector = CurrentIndexInPeriodicCurrentVector + continuityInfo.m_totalReadingContinuousRange - 1;
-	   }
-	   CurrentIndexInPeriodicCurrentVector++;
-	}
-	return continuityInfoList;
+  int currentIndexInputData = 0;
+  std::vector<ContinuousRangeInfo> ContinuosRangeList;
+  std::sort(inputData.begin(), inputData.end());
+  while((currentIndexInputData < inputData.size()) == true)
+  {
+    ContinuousRangeInfo ContinuousRangeInfo;
+    checkContinuityInInputData(inputData, currentIndexInputData, ContinuousRangeInfo);
+    if(ContinuousRangeInfo.numberOfReadingsContinuousRange > 1)
+    {
+      ContinuosRangeList.push_back(ContinuousRangeInfo);
+      currentIndexInputData = currentIndexInputData + ContinuousRangeInfo.numberOfReadingsContinuousRange - 1;
+    }
+    currentIndexInputData++;
+  }
+  return ContinuosRangeList;
 }
